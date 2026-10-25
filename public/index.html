@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SCY Chat</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="authView" class="auth-shell hidden">
+  <div class="auth-card">
+    <div class="brand"><div class="logo">S</div><div><b>SCY CHAT</b><small>YOUR SPACE TO TALK</small></div></div>
+    <h1 id="authTitle">С возвращением</h1><p class="sub" id="authSub">Войди, чтобы продолжить общение</p>
+    <form id="authForm">
+      <div id="displayNameField" class="field hidden"><label>Как тебя называть</label><input id="displayName" maxlength="32" placeholder="Отображаемое имя"></div>
+      <div class="field"><label>Имя пользователя</label><input id="username" minlength="3" maxlength="20" autocomplete="username" required placeholder="например, scy_user"></div>
+      <div class="field"><label>Пароль</label><input id="password" type="password" minlength="8" maxlength="128" autocomplete="current-password" required placeholder="Минимум 8 символов"></div>
+      <p id="authError" class="error"></p><button class="primary full" id="authSubmit">Войти</button>
+    </form>
+    <p class="switch-auth"><span id="switchText">Нет аккаунта?</span> <button id="switchMode" class="link">Зарегистрироваться</button></p>
+    <p class="tiny">Не используй пароль от других сайтов. Это самостоятельный демонстрационный сервис.</p>
+  </div>
+</div>
+<div id="app" class="app hidden">
+  <aside class="sidebar">
+    <div class="brand"><div class="logo">S</div><div><b>SCY CHAT</b><small>YOUR SPACE TO TALK</small></div></div>
+    <div class="me-card">
+      <img id="myAvatar" class="avatar" alt=""><div class="me-copy"><b id="myName">Профиль</b><small id="myHandle">@user</small></div>
+      <button class="icon-btn" id="profileBtn" title="Редактировать профиль">⚙</button>
+    </div>
+    <div class="list-heading"><span>СООБЩЕНИЯ</span><button class="icon-btn" id="newChatBtn" title="Найти пользователя">＋</button></div>
+    <div class="search-wrap"><span>⌕</span><input id="userSearch" placeholder="Найти пользователя..."></div>
+    <div id="userList" class="user-list"></div>
+    <div class="side-bottom"><span class="online-dot"></span> Защищённая сессия <button id="logoutBtn" class="link">Выйти</button></div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <button id="mobileBack" class="icon-btn mobile-back">‹</button>
+      <img id="chatAvatar" class="avatar" alt=""><div class="contact"><b id="chatName">Выберите чат</b><small id="chatHandle">Найди пользователя, чтобы начать</small></div>
+      <div class="top-right"><span class="live-pill"><i></i> LIVE</span></div>
+    </header>
+    <section id="messages" class="messages"><div class="welcome"><div class="welcome-icon">✦</div><h2>Добро пожаловать в SCY Chat</h2><p>Выбери пользователя слева, чтобы начать переписку.</p></div></section>
+    <div class="composer-area">
+      <div id="imagePreview" class="image-preview hidden"><img id="previewImg" alt="Предпросмотр"><button id="removeImage" class="icon-btn">✕</button></div>
+      <form id="messageForm" class="composer">
+        <input id="imageInput" type="file" accept="image/png,image/jpeg,image/gif,image/webp" hidden>
+        <button type="button" id="attachBtn" class="icon-btn attach" title="Прикрепить изображение">＋</button>
+        <textarea id="messageInput" rows="1" placeholder="Написать сообщение..." maxlength="4000" disabled></textarea>
+        <button type="submit" id="sendBtn" class="send" disabled title="Отправить">➤</button>
+      </form><div class="composer-hint">Enter — отправить · Shift + Enter — новая строка</div>
+    </div>
+  </main>
+</div>
+<div id="profileModal" class="modal hidden"><form id="profileForm" class="modal-card"><button type="button" class="modal-close" id="closeProfile">✕</button><h2>Твой профиль</h2><div class="avatar-edit"><img id="profileAvatarPreview" class="avatar large" alt=""><label class="secondary upload-label">Изменить фото<input id="avatarInput" type="file" accept="image/png,image/jpeg,image/webp" hidden></label></div><label class="field"><span>Отображаемое имя</span><input id="profileName" maxlength="32" required></label><p id="profileError" class="error"></p><button class="primary full">Сохранить</button></form></div>
+<div id="toast" class="toast hidden"></div>
+<audio id="messageSound" preload="auto"></audio>
+<script src="/socket.io/socket.io.js"></script><script src="/app.js"></script>
+</body></html>
